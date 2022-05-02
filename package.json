@@ -1,0 +1,18 @@
+{
+  "name": "solar-rocket",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "client": "npm start --prefix client",
+    "server-ts": "npm run ts-watch --prefix server",
+    "server": "npm run server-watch --prefix server",
+    "start": "concurrently --kill-others --names \"Server-TS,Server,Client\" -c \"bgMagenta.bold,bgMagenta.bold,bgGreen.bold\" npm:server-ts npm:server npm:client"
+  },
+  "author": "BenManage",
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "concurrently": "^7.1.0",
+    "nodemon": "^2.0.15"
+  }
+}
