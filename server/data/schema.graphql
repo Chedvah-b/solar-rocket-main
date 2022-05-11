@@ -1,84 +1,85 @@
 type Query {
-  Mission(id: ID!): Mission
-  Missions(sort: MissionSortOptions): [Mission]!
+	Mission(id: ID!): Mission
+	Missions(sort: MissionSortOptions): [Mission]!
 }
 
 type Mutation {
-  createMission(mission: MissionInput): Mission
+	createMission(mission: MissionInput): Mission
+	deleteMission(id: ID!): Mission
 }
 
 input MissionInput {
-  title: String!
-  operator: String!
-  launch: LaunchInput!
-  orbit: OrbitInput!
-  payload: PayloadInput!
+	title: String!
+	operator: String!
+	launch: LaunchInput!
+	orbit: OrbitInput!
+	payload: PayloadInput!
 }
 
 input LaunchInput {
-  date: DateTime!
-  vehicle: String!
-  location: LocationInput!
+	date: DateTime!
+	vehicle: String!
+	location: LocationInput!
 }
 
 input LocationInput {
-  name: String!
-  longitude: Float!
-  latitude: Float!
+	name: String!
+	longitude: Float!
+	latitude: Float!
 }
 
 input OrbitInput {
-  periapsis: Int!
-  apoapsis: Int!
-  inclination: Int!
+	periapsis: Int!
+	apoapsis: Int!
+	inclination: Int!
 }
 
 input PayloadInput {
-  capacity: Int!
-  available: Int!
+	capacity: Int!
+	available: Int!
 }
 
 input MissionSortOptions {
-  field: MissionSortFields!
-  desc: Boolean
+	field: MissionSortFields!
+	desc: Boolean
 }
 
 enum MissionSortFields {
-  Title
-  Date
-  Operator
+	Title
+	Date
+	Operator
 }
 
 type Mission {
-  id: ID!
-  title: String!
-  operator: String!
-  launch: Launch!
-  orbit: Orbit!
-  payload: Payload!
+	id: ID!
+	title: String!
+	operator: String!
+	launch: Launch!
+	orbit: Orbit!
+	payload: Payload!
 }
 
 type Launch {
-  date: DateTime!
-  vehicle: String!
-  location: Location!
+	date: DateTime!
+	vehicle: String!
+	location: Location!
 }
 
 type Location {
-  name: String!
-  longitude: Float!
-  latitude: Float!
+	name: String!
+	longitude: Float!
+	latitude: Float!
 }
 
 type Orbit {
-  periapsis: Int!
-  apoapsis: Int!
-  inclination: Int!
+	periapsis: Int!
+	apoapsis: Int!
+	inclination: Int!
 }
 
 type Payload {
-  capacity: Int!
-  available: Int!
+	capacity: Int!
+	available: Int!
 }
 
 scalar DateTime

@@ -6,7 +6,7 @@ export const ListMissions = (missions: Mission[], args: any) => {
   if (args.sort) {
     missions.sort((aMission: Mission, bMission: Mission) => {
       let a: String | Date, b: String | Date;
-      switch (args.sort.field) {
+      switch (args.sort?.field) {
         case "Title":
           a = aMission.title;
           b = bMission.title;
@@ -22,7 +22,7 @@ export const ListMissions = (missions: Mission[], args: any) => {
           a = "";
           b = "";
       }
-      if (args.sort.desc === true) {
+      if (args.sort?.desc === true) {
         return a < b ? 1 : -1;
       } else {
         return a > b ? 1 : -1;  

@@ -1,20 +1,50 @@
-import { ThemeProvider } from "@emotion/react";
-import { Typography } from "@mui/material";
-import {createTheme, responsiveFontSizes} from "@mui/material/styles"
+import { useEffect, useState } from "react";
 import { AppLayout } from "../layouts/AppLayout";
+import ReactMarkdown from "react-markdown";
+import { Box, CircularProgress, Container } from "@mui/material";
 
 const Home = (): JSX.Element => {
-  let theme = createTheme();
-  theme = responsiveFontSizes(theme);
-  return (
-    <AppLayout>
-      <ThemeProvider theme={theme}>
-        <Typography variant="h2">Solar Rocket App</Typography>
-        <Typography variant="h3">Welcome to the Solar Rocket App</Typography>
-        
-      </ThemeProvider>
-    </AppLayout>
-  );
+	const [readmeContent, setReadmeContent] = useState<string | null>(null);
+
+	useEffect(() => {
+		fetch("/readme").then(async (res: Response) => {
+			setReadmeContent(await res.text());
+		});
+	}, []);
+
+	return (
+		<AppLayout>
+			<Container maxWidth="lg">
+				{readmeContent ? (
+					<ReactMarkdown
+						linkTarget="_blank"
+						components={{
+							code({ children, ...props }) {
+								return (
+									<code
+										{...props}
+										style={{
+											backgroundColor: "#eee",
+											padding: 2,
+											fontSize: "0.8em",
+										}}
+									>
+										{children}
+									</code>
+								);
+							},
+						}}
+					>
+						{readmeContent}
+					</ReactMarkdown>
+				) : (
+					<Box sx={{ textAlign: "center" }}>
+						<CircularProgress />
+					</Box>
+				)}
+			</Container>
+		</AppLayout>
+	);
 };
 
 export { Home };
