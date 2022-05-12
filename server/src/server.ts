@@ -96,11 +96,15 @@ const main = async () => {
           
           const missions = await loadMissions();
           const mission = GetMissionById(missions, args.id);
-          missions.splice(missions.indexOf(args.id),1)
+          const newMissions: any = [];
+          missions.filter((index) => {
+            if (index.id !== args.id)
+              newMissions.push(index);
+          })
             
             await writeFile(
             path.join(DATA_DIR, DATA_FILE_MISSIONS),
-            JSON.stringify(missions),
+            JSON.stringify(newMissions),
             "utf8"
           );
             
